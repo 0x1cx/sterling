@@ -1,7 +1,7 @@
 local Players = game:GetService("Players")
 local Scripts = {
-    [6931042565] = "https://api.luarmor.net/files/v4/loaders/23887e73347f37b16ca4fd2c433e7914.lua", -- VBL 
-    [6945584306] = "https://api.luarmor.net/files/v4/loaders/a30ba67e0f7221e461f226234fbafa4f.lua",  -- AZL
+    [6945584306] = "https://api.luarmor.net/files/v4/loaders/23887e73347f37b16ca4fd2c433e7914.lua",
+    [6931042565] = "https://api.luarmor.net/files/v4/loaders/a30ba67e0f7221e461f226234fbafa4f.lua",
 }
 
 if not game:IsLoaded() then
@@ -14,18 +14,19 @@ while not player do
     player = Players.LocalPlayer
 end
 
-player:WaitForChild("DataLoaded")
+player:WaitForChild("DataLoaded", 60)
+
 local gameId = game.GameId
 local url = Scripts[gameId]
 
 if not url then
-    rconsolewarn("[Sterling Hub Loader] No script registered for gameId " .. tostring(gameId))
+    rconsolewarn("[Sterling Hub Loader] No script registered for GameId " .. tostring(gameId))
     return
 end
 
 local ok, src = pcall(game.HttpGet, game, url)
 if not ok or type(src) ~= "string" or src == "" then
-    rconsolewarn("[Sterling Hub Loader] Failed to fetch script for gameId " .. tostring(gameId))
+    rconsolewarn("[Sterling Hub Loader] Failed to fetch script for GameId " .. tostring(gameId))
     return
 end
 
