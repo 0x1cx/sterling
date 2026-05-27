@@ -16,16 +16,16 @@ end
 
 player:WaitForChild("DataLoaded")
 local gameId = game.GameId
-local url = Scripts[placeId]
+local url = Scripts[gameId]
 
 if not url then
-    rconsolewarn("[Sterling Hub Loader] No script registered for PlaceId " .. tostring(gameId))
+    rconsolewarn("[Sterling Hub Loader] No script registered for gameId " .. tostring(gameId))
     return
 end
 
 local ok, src = pcall(game.HttpGet, game, url)
 if not ok or type(src) ~= "string" or src == "" then
-    rconsolewarn("[Sterling Hub Loader] Failed to fetch script for PlaceId " .. tostring(gameId))
+    rconsolewarn("[Sterling Hub Loader] Failed to fetch script for gameId " .. tostring(gameId))
     return
 end
 
