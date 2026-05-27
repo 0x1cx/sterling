@@ -20,23 +20,23 @@ local gameId = game.GameId
 local url = Scripts[gameId]
 
 if not url then
-    rconsolewarn("[Sterling Hub Loader] No script registered for GameId " .. tostring(gameId))
+    warn("[Sterling Hub Loader] No script registered for GameId " .. tostring(gameId))
     return
 end
 
 local ok, src = pcall(game.HttpGet, game, url)
 if not ok or type(src) ~= "string" or src == "" then
-    rconsolewarn("[Sterling Hub Loader] Failed to fetch script for GameId " .. tostring(gameId))
+    warn("[Sterling Hub Loader] Failed to fetch script for GameId " .. tostring(gameId))
     return
 end
 
 local fn, err = loadstring(src)
 if not fn then
-    rconsolewarn("[Sterling Hub Loader] loadstring error: " .. tostring(err))
+    warn("[Sterling Hub Loader] loadstring error: " .. tostring(err))
     return
 end
 
 local runOk, runErr = pcall(fn)
 if not runOk then
-    rconsolewarn("[Sterling Hub Loader] runtime error: " .. tostring(runErr))
+    warn("[Sterling Hub Loader] runtime error: " .. tostring(runErr))
 end
